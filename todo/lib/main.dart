@@ -1,17 +1,38 @@
 import 'package:flutter/material.dart'; //para android
 //import 'package:flutter/cupertino.dart'; //para ios
 
-void main() => runApp(MyApp());
+void main() => runApp(App());
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'ToDo App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: Text("Oi"),
+        title: Text("ToDo List"),
+        actions: <Widget>[
+          Icon(Icons.plus_one),
+        ],
+      ),
+      body: Container(
+        child: Center(
+          child: Text("Olá, Mundo!"),
+        ),
+      ),
     );
   }
 }
