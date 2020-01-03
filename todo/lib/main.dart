@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart'; //para android
-//import 'package:flutter/cupertino.dart'; //para ios
+import 'package:flutter/material.dart'; //para android -->   //import 'package:flutter/cupertino.dart'; //para ios
+import 'models/item.dart';
 
 void main() => runApp(App());
 
@@ -17,21 +17,56 @@ class App extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  var items = new List<Item>();
+
+  HomePage() {
+    items = [];
+    items.add(Item(title: "Caderno", done: false));
+    items.add(Item(title: "Caneta", done: true));
+    items.add(Item(title: "Agenda", done: false));
+  }
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var newTaskCtrl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Text("Oi"),
-        title: Text("ToDo List"),
-        actions: <Widget>[
-          Icon(Icons.plus_one),
-        ],
-      ),
-      body: Container(
-        child: Center(
-          child: Text("Olá, Mundo!"),
+        title: TextFormField(
+          controller: newTaskCtrl,
+          keyboardType: TextInputType.text,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+          ),
+          decoration: InputDecoration(
+            labelText: "Nova tarefa",
+            labelStyle: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
+      ),
+      body: ListView.builder(
+        itemCount: widget.items.length,
+        itemBuilder: (BuildContext ctxt, int index) {
+          final item = widget.items[index];
+          return CheckboxListTile(
+            title: Text(item.title),
+            key: Key(item.title),
+            value: item.done,
+            onChanged: (value) {
+              setState(() {
+                item.done = value;
+              });
+            },
+          );
+        },
       ),
     );
   }
