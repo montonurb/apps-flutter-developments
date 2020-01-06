@@ -1,5 +1,10 @@
 import 'dart:io';
 
+//Comentarios em uma linha
+/**
+ * 
+ * Comentarios em multline
+ */
 main(){
 
   print("****** CÁLCULO IMC ******");
@@ -13,7 +18,7 @@ pedirInfo(){
   
   print("Informe a sua altura: ");
   String altuText = stdin.readLineSync();
-  double altuConv = double.parse(altuText);;
+  double altuConv = double.parse(altuText);
 
   calcImc(pesoConv, altuConv);
 }
@@ -26,14 +31,14 @@ calcImc(double peso, double altura){
 
 imprimirResultado(double imc){
   if(imc < 18){
-    print("Você está desnutrido!");
+    print("Seu imc é $imc. Você está desnutrido!");
   } else if (imc >= 18 && imc <= 25){
-    print("Você está no peso ideal!");
+    print("Seu imc é $imc. Você está no peso ideal!");
   } else if (imc > 25 && imc <= 30){
-    print("Você está acima do peso!");
+    print("Seu imc é $imc. Você está acima do peso!");
   } else if (imc > 30 && imc <= 40) {
-    print("Você está obeso!");
+    print("Seu imc é $imc. Você está obeso!");
   } else {
-    print("Você está obeso mórbido!");
+    print("Seu imc é $imc. Você está obeso mórbido!");
   }
 }
