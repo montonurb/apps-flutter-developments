@@ -3,15 +3,28 @@ import 'dart:io';
 main(){
 
   print("****** CÁLCULO IMC ******");
+  pedirInfo();
+}
+
+pedirInfo(){
   print("Informe o seu peso: ");
-  var pesoText = stdin.readLineSync();
-  var pesoConv = double.parse(pesoText);
+  String pesoText = stdin.readLineSync();
+  double pesoConv = double.parse(pesoText);
+  
   print("Informe a sua altura: ");
-  var altuText = stdin.readLineSync();
-  var altuConv = double.parse(altuText);
+  String altuText = stdin.readLineSync();
+  double altuConv = double.parse(altuText);;
 
-  var imc = pesoConv / (altuConv*altuConv);
+  calcImc(pesoConv, altuConv);
+}
 
+calcImc(double peso, double altura){
+  double imc = peso / (altura*altura);
+
+  imprimirResultado(imc);
+}
+
+imprimirResultado(double imc){
   if(imc < 18){
     print("Você está desnutrido!");
   } else if (imc >= 18 && imc <= 25){
