@@ -1,7 +1,7 @@
 import 'dart:io';
 
 main(){
-  var nome = ["Bruno", "Monteiro"];
+  var nome = ["Bruno", "Monteiro", "Cardoso"];
 
   bool condition = true;
 
@@ -9,6 +9,11 @@ main(){
   Pra consultar um local da array especifico:
   print(nome[0]);
   */
+
+  /**
+   Para reomover:
+   nome.remove("Cardoso"); // ou nome.removeAt(0);
+   */
 
   while(condition){
     print(nome.length);
