@@ -1,7 +1,8 @@
 import 'dart:io';
 
 main(){
-  var nome = ["Bruno", "Monteiro", "Cardoso"];
+
+/*   var nome = ["Bruno", "Monteiro", "Cardoso"];
 
   bool condition = true;
 
@@ -27,5 +28,12 @@ main(){
       nome.add(text);
     }
     print("\n Nome informado:\n$nome");
-  }
+  } */
+
+  List<String> nomes = ["Bruno Monteiro", "André Igor", "Eduardo Sávio", "Roney Silva"];
+  print(nomes);
+  nomes.add("Diego Laverson");
+  print(nomes);
+  nomes.removeAt(2);
+  print(nomes);
 }
