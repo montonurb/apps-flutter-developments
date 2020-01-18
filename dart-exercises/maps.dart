@@ -1,6 +1,6 @@
 import "dart:io";
 
-Map<String, dynamic> cadastro = {};
+List<Map<String, dynamic>> cadastros = [];
 
 main() {
   //Map<tipo da variavel, tipo do valor> variavel = {}
@@ -25,7 +25,7 @@ main() {
     } else if (comando == "cadastrar") {
       cadastrar();
     } else if (comando == "imprimir") {
-      print(cadastro);
+      print(cadastros);
     } else {
       print("=== Comando invalido! ===");
     }
@@ -33,6 +33,7 @@ main() {
 }
 
 cadastrar() {
+  Map<String, dynamic> cadastro = {};
   print("Informe o seu nome:");
   cadastro["nome"] = stdin.readLineSync();
 
@@ -44,4 +45,5 @@ cadastrar() {
 
   print("Informe o seu estado:");
   cadastro["estado"] = stdin.readLineSync();
+  cadastros.add(cadastro);
 }
