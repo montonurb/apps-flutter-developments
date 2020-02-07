@@ -2,7 +2,7 @@ import "dart:io";
 
 List<Map<String, dynamic>> cadastros = [];
 
-main() {
+functionMaps() {
   //Map<tipo da variavel, tipo do valor> variavel = {}
 /*   Map<String, dynamic> maps = {
     "nome": "Bruno Monteiro",

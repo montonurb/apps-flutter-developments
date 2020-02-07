@@ -2,7 +2,7 @@ import "dart:io";
 
 //List<String> products = [];
 
-main() {
+carrinhoCompras() {
   List<String> products = [];
   bool condition = true;
 

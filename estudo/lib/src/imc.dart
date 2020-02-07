@@ -5,7 +5,7 @@ import 'dart:io';
  * 
  * Comentarios em multline
  */
-main(){
+calculoImc(){
 
   print("****** CÁLCULO IMC ******");
   pedirInfo();
