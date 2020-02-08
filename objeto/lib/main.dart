@@ -25,5 +25,5 @@ main(List<String> args) {
   print("O gato ${gato.nome} faz ${gato.barulho}.");
   print("O cahorro ${cachorro.nome} faz ${cachorro.barulho}.");
   print("O grilo ${grilo.nome} faz ${grilo.barulho}.");
-  print("O macaco ${macaco.nome} faz ${macaco.barulho}.");
+  print("O macaco ${macaco.nome} faz ${macaco.barulho}. teste");
 }
