@@ -1,3 +1,7 @@
+import 'src/gato.dart';
+import 'src/cachorro.dart';
+import 'src/grilo.dart';
+import 'src/macaco.dart';
 /**import 'package:objeto/src/pessoa.dart';
 
 main(List<String> args) {
@@ -10,10 +14,7 @@ main(List<String> args) {
   print(pessoa.altura);
 }
 **/
-import 'package:objeto/src/gato.dart';
-import 'package:objeto/src/cachorro.dart';
-import 'package:objeto/src/grilo.dart';
-import 'package:objeto/src/macaco.dart';
+
 
 main(List<String> args) {
   Gato gato = Gato(nome: "Lerry", barulho: "miau");

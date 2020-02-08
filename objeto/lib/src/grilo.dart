@@ -1,4 +1,4 @@
-import 'package:objeto/src/animal.dart';
+import 'animal.dart';
 
 class Grilo extends Animal{
   String nome;
