@@ -1,4 +1,4 @@
-import 'src/gato.dart';
+/* import 'src/gato.dart';
 import 'src/cachorro.dart';
 import 'src/grilo.dart';
 import 'src/macaco.dart';
@@ -26,4 +26,25 @@ main(List<String> args) {
   print("O cahorro ${cachorro.nome} faz ${cachorro.barulho}.");
   print("O grilo ${grilo.nome} faz ${grilo.barulho}.");
   print("O macaco ${macaco.nome} faz ${macaco.barulho}.");
+} */
+import 'dart:io';
+import 'src/pessoa2.dart';
+
+Pessoa pessoa = Pessoa();
+
+main(List<String> args) {
+  print("Informe o nome:");
+  pessoa.nome = stdin.readLineSync();
+  print("Informe a idade:");
+  pessoa.idade = int.parse(stdin.readLineSync());
+  print("Informe sua altura:");
+  pessoa.altura = double.parse(stdin.readLineSync());
+  print("Informe seu peso:");
+  pessoa.peso = double.parse(stdin.readLineSync());
+
+
+  print("--------------------------\n\n\n\n");
+  print("Nome: ${pessoa.nome}");
+  print("IMC: ${pessoa.imc()}");
+  print("Maioridade: ${pessoa.maiorIdade()}");
 }
