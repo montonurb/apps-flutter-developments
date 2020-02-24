@@ -8,19 +8,16 @@ void main(){
       color: Colors.white,
       child: Column(
         children: <Widget>[
-          Text(
-            "Lorem ipsum ",
-            style: TextStyle(
-              fontSize: 35,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.normal, //ao invés de usar normal, posso colocar w100, para definir
-              letterSpacing: 0,
-              wordSpacing: 0,
-              decoration: TextDecoration.underline,
-              decorationColor: Colors.greenAccent,
-              decorationStyle: TextDecorationStyle.solid,
-              color: Colors.black
-            ),
+          FlatButton(
+            onPressed: null,
+            child: Text(
+              "Botão",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                decoration: TextDecoration.none
+              ),
+            )
           )
         ],
       ),
