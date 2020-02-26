@@ -20,6 +20,7 @@ void main(){
           child: Row(
             children: <Widget>[
               Text("Texto 1."),
+              Text("Texto 2."),
               Text("Texto 2.")
             ]
           ),
