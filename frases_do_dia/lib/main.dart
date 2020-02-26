@@ -3,20 +3,29 @@ import 'package:flutter/material.dart';
 void main(){
 
   runApp(MaterialApp(
-    //debugShowCheckedModeBanner: false, //Para tirar a faixa de Debug da aplicação
-    title: "Frases do dia",
-    home: Container(
-      //color: Colors.white,
-      margin: EdgeInsets.only(top: 40), //espaçamento interno
-      //margin: EdgeInsets.all(30), //espaçamento externo
-      decoration: BoxDecoration(
-        border: Border.all(width: 3, color: Colors.white)
+    debugShowCheckedModeBanner: false, //Para tirar a faixa de Debug da aplicação
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text("Instagram"),
+        backgroundColor: Colors.green,
       ),
-      child: Image.asset(
-        "images/mesa.jpg",
-        fit: BoxFit.cover,
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Text("Sua foto aqui."),
       ),
-    ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.lightGreen,
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Row(
+            children: <Widget>[
+              Text("Texto 1."),
+              Text("Texto 2.")
+            ]
+          ),
+        ),
+      ),
+    ) ,
   ));
 
 }
