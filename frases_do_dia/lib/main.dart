@@ -12,14 +12,9 @@ void main(){
       decoration: BoxDecoration(
         border: Border.all(width: 3, color: Colors.white)
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Text("T1"),
-          Text("T2"),
-          Text("T3 testando")
-        ],
+      child: Image.asset(
+        "images/mesa.jpg",
+        fit: BoxFit.cover,
       ),
     ),
   ));
