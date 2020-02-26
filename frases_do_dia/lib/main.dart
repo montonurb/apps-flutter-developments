@@ -18,7 +18,7 @@ void main(){
         children: <Widget>[
           Text("T1"),
           Text("T2"),
-          Text("T3")
+          Text("T3 testando")
         ],
       ),
     ),
