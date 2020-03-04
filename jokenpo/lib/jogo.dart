@@ -128,38 +128,43 @@ class _JogoState extends State<Jogo> {
               ),
             ]
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 32),
-            child: Text(
-              "Você: $_userWin",
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 32),
+              child: Text(
+                "Você: $_userWin",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 5),
-            child: Text(
-              "Computador: $_computerWin",
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold
+            Padding(
+              padding: EdgeInsets.only(top: 5),
+              child: Text(
+                "Computador: $_computerWin",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 5),
-            child: Text(
-              "Empate: $_empate",
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold
+            Padding(
+              padding: EdgeInsets.only(top: 5),
+              child: Text(
+                "Empate: $_empate",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),
               ),
             ),
+          ]
           ),
         ]
       ),
