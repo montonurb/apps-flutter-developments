@@ -1,17 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Editor extends StatelessWidget {
+class Pagar extends StatelessWidget {
   final TextEditingController controlador;
   final String rotulo;
   final String dica;
   final IconData icone;
 
-  Editor({
-    this.controlador,
-    this.rotulo,
-    this.dica,
-    this.icone,
-  });
+  Pagar({this.controlador, this.rotulo, this.dica, this.icone});
 
   @override
   Widget build(BuildContext context) {
