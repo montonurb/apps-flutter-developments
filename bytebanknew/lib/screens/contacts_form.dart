@@ -1,3 +1,4 @@
+import 'package:bytebanknew/database/dao/contact_dao.dart';
 import 'package:bytebanknew/models/contact.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class _ContactsFormState extends State<ContactsForm> {
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _accountNumberController = TextEditingController();
+  final ContactDao _dao = ContactDao();
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +24,12 @@ class _ContactsFormState extends State<ContactsForm> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: TextField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: 'Full name',
-              ),
-              style: TextStyle(fontSize: 24.0),
+          TextField(
+            controller: _nameController,
+            decoration: InputDecoration(
+              labelText: 'Full name',
             ),
+            style: TextStyle(fontSize: 24.0),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
@@ -54,7 +53,7 @@ class _ContactsFormState extends State<ContactsForm> {
                   final int accountNumber = 
                       int.tryParse(_accountNumberController.text);
                   final Contact newContact = Contact(0, name, accountNumber);
-                  Navigator.pop(context, newContact);
+                  _dao.save(newContact).then((id) => Navigator.pop(context));
                 }),
             ),
           )
