@@ -3,6 +3,7 @@ import 'package:imc_app/screens/formulario.dart';
 import 'package:imc_app/screens/home.dart';
 import 'package:imc_app/screens/imc_list.dart';
 import 'package:imc_app/screens/login.dart';
+import 'package:imc_app/screens/settings.dart';
 
 class MenuDrawer extends StatelessWidget {
   @override
@@ -49,6 +50,11 @@ class MenuDrawer extends StatelessWidget {
           title: Text('Lista de Avaliações'),
         ),
         ListTile(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ConfiguracoesApp();
+            }));
+          },
           leading: Icon(Icons.settings),
           title: Text('Configurações'),
         ),
