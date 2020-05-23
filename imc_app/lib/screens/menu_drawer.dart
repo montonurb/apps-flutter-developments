@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:imc_app/screens/formulario.dart';
+import 'package:imc_app/screens/home.dart';
 import 'package:imc_app/screens/imc_list.dart';
+import 'package:imc_app/screens/login.dart';
 
 class MenuDrawer extends StatelessWidget {
   @override
@@ -20,7 +22,11 @@ class MenuDrawer extends StatelessWidget {
           ),
         ),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return HomePage();
+            }));
+          },
           leading: Icon(Icons.home),
           title: Text('Tela Inicial'),
         ),
@@ -47,6 +53,11 @@ class MenuDrawer extends StatelessWidget {
           title: Text('Configurações'),
         ),
         ListTile(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Login();
+            }));
+          },
           leading: Icon(Icons.exit_to_app),
           title: Text('Sair'),
         )
