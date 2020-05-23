@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Icon(
-                        Icons.star_border,
+                        Icons.format_list_bulleted,
                         size: 50,
                         color: Colors.white,
                       ),
