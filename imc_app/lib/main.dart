@@ -12,10 +12,10 @@ class ImcApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.teal[500],
+        primaryColor: Colors.teal[400],
         accentColor: Colors.blueAccent,
         buttonTheme: ButtonThemeData(
-          buttonColor: Colors.brown[300],
+          buttonColor: Colors.teal[400],
           textTheme: ButtonTextTheme.primary
         )
       ),
