@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imc_app/models/dados_imc.dart';
 import 'package:imc_app/screens/formulario.dart';
+import 'package:imc_app/screens/menu_drawer.dart';
 
 class ImcList extends StatefulWidget {
   final List<DadosImc> _imcs = List();
@@ -12,15 +13,19 @@ class _ImcListState extends State<ImcList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Teste'),
-      ),
-      body: ListView.builder(
-        itemCount: widget._imcs.length,
-        itemBuilder: (context, indice) {
-          final imc = widget._imcs[indice];
-          return ItemImc(imc);
-        },
+      drawer: MenuDrawer(),
+      appBar: AppBar(title: Text('Lista')),
+      body: GridView.count(
+        crossAxisCount: 2,
+        children: <Widget>[
+          ListView.builder(
+            itemCount: widget._imcs.length,
+            itemBuilder: (context, indice) {
+              final imc = widget._imcs[indice];
+              return ItemImc(imc);
+            },
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -129,3 +134,27 @@ class ItemImc extends StatelessWidget {
 //   ),
 //       ],
 //     ));
+
+// GRIDVIEW
+// Scaffold(
+//       appBar: AppBar(
+//         title: Text('Teste'),
+//       ),
+//       body: ListView.builder(
+//         itemCount: widget._imcs.length,
+//         itemBuilder: (context, indice) {
+//           final imc = widget._imcs[indice];
+//           return ItemImc(imc);
+//         },
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         child: Icon(Icons.add),
+//         onPressed: () {
+//           Navigator.push(context, MaterialPageRoute(builder: (context) {
+//             return FormularioIMC();
+//           })).then(
+//             (imcRecebido) => _atualiza(imcRecebido),
+//           );
+//         },
+//       ),
+//     );
