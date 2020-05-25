@@ -8,6 +8,6 @@ class DadosImc {
 
   @override
   String toString() {
-    return 'DadosImc{peso: $peso, altura: $altura';
+    return 'DadosImc{peso: $peso, altura: $altura}';
   }
 }
