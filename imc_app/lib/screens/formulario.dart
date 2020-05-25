@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imc_app/models/dados_imc.dart';
-import 'package:imc_app/screens/imc_list.dart';
+//import 'package:imc_app/screens/imc_list.dart';
 import 'package:imc_app/screens/menu_drawer.dart';
 
 class FormularioIMC extends StatefulWidget {
@@ -73,10 +73,8 @@ class _FormularioIMCState extends State<FormularioIMC> {
     final int altura = int.tryParse(_controllerAltura.text);
     if(peso != null && altura != null) {
       DadosImc(peso, altura);
-      //final campoCriado = DadosImc(peso, altura);
-      Navigator.push( context, MaterialPageRoute(builder: (context) {
-        return ImcList();
-      }));
+      final campoCriado = DadosImc(peso, altura);
+        return Navigator.pop(context, campoCriado);
     }
   }
 }
