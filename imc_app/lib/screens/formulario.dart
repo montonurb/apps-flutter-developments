@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:imc_app/models/dados_imc.dart';
-//import 'package:imc_app/screens/imc_list.dart';
 import 'package:imc_app/screens/menu_drawer.dart';
 
 class FormularioIMC extends StatefulWidget {
@@ -70,11 +69,18 @@ class _FormularioIMCState extends State<FormularioIMC> {
 
   void _criaCampoImc(BuildContext context) {
     final double peso = double.tryParse(_controllerPeso.text);
-    final int altura = int.tryParse(_controllerAltura.text);
+    final double altura = double.tryParse(_controllerAltura.text);
+    final DateTime dataAvaliacao = DateTime.now();
     if(peso != null && altura != null) {
-      DadosImc(peso, altura);
-      final campoCriado = DadosImc(peso, altura);
+      DadosImc(peso, altura, dataAvaliacao);
+      final campoCriado = DadosImc(peso, altura, dataAvaliacao);
         return Navigator.pop(context, campoCriado);
     }
   }
 }
+
+
+
+/**
+ * '$formatDate(dataAvaliacao, [dd, '/', mm, '/', yyyy])'
+ */

@@ -1,13 +1,14 @@
 class DadosImc {
   final double peso;
-  final int altura;
+  final double altura;
+  final DateTime dataAvaliacao;
 
   DadosImc(
-    this.peso, this.altura
+    this.peso, this.altura, this.dataAvaliacao
   );
 
   @override
   String toString() {
-    return 'DadosImc{peso: $peso, altura: $altura}';
+    return 'DadosImc{peso: $peso, altura: $altura, data: $dataAvaliacao}';
   }
 }

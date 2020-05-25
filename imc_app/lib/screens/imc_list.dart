@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imc_app/models/dados_imc.dart';
 import 'package:imc_app/screens/formulario.dart';
 import 'package:imc_app/screens/menu_drawer.dart';
+import 'package:date_format/date_format.dart';
 
 class ImcList extends StatefulWidget {
   final List<DadosImc> _imcs = List();
@@ -15,17 +16,13 @@ class _ImcListState extends State<ImcList> {
     return Scaffold(
       drawer: MenuDrawer(),
       appBar: AppBar(title: Text('Lista')),
-      body: GridView.count(
-        crossAxisCount: 2,
-        children: <Widget>[
-          ListView.builder(
-            itemCount: widget._imcs.length,
-            itemBuilder: (context, indice) {
-              final imc = widget._imcs[indice];
-              return ItemImc(imc);
-            },
-          ),
-        ],
+      body: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemCount: widget._imcs.length,
+        itemBuilder: (context, indice) {
+          final imc = widget._imcs[indice];
+          return ItemImc(imc);
+        }
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -36,6 +33,7 @@ class _ImcListState extends State<ImcList> {
             (imcRecebido) => _atualiza(imcRecebido),
           );
         },
+        backgroundColor: Colors.teal[400],
       ),
     );
   }
@@ -56,6 +54,7 @@ class ItemImc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.teal[100],
       elevation: 10,
       margin: EdgeInsets.all(10),
       shape: RoundedRectangleBorder(
@@ -67,7 +66,7 @@ class ItemImc extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'AVALIAÇÃO',
+                'ª AVALIAÇÃO',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
@@ -75,7 +74,7 @@ class ItemImc extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(right: 20),
                 child: Text(
-                  '12/01/2020',
+                  '${formatDate(_imc.dataAvaliacao, [dd,'/', mm, '/', yyyy])}',
                   style: TextStyle(fontSize: 12),
                 ),
               )
@@ -96,7 +95,7 @@ class ItemImc extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text('Imc: '),
+                      child: Text('Imc: ${calcImc(_imc.peso, _imc.altura).toStringAsPrecision(4)}'),
                     ),
                   ],
                 ),
@@ -109,52 +108,13 @@ class ItemImc extends StatelessWidget {
   }
 }
 
-// return Scaffold(
-//     drawer: MenuDrawer(),
-//     appBar: AppBar(title: Text('Lista')),
-//     body: GridView.count(
-//       crossAxisCount: 2,
-//       children: <Widget>[
-//         ListView.builder(
-//           itemCount: widget._imcs.length,
-//           itemBuilder: (context, indice) {
-//             final imc = widget._imcs[indice];
-//             return ItemImc(imc);
-//           },
-//         ),
-//         floatingActionButton: FloatingActionButton(
-//     child: Icon(Icons.add),
-//     onPressed: () {
-//       Navigator.push(context, MaterialPageRoute(builder: (context) {
-//         return FormularioIMC();
-//       })).then(
-//         (imcRecebido) => _atualiza(imcRecebido),
-//       );
-//     },
-//   ),
-//       ],
-//     ));
+calcImc(double peso, double altura) {
 
-// GRIDVIEW
-// Scaffold(
-//       appBar: AppBar(
-//         title: Text('Teste'),
-//       ),
-//       body: ListView.builder(
-//         itemCount: widget._imcs.length,
-//         itemBuilder: (context, indice) {
-//           final imc = widget._imcs[indice];
-//           return ItemImc(imc);
-//         },
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         child: Icon(Icons.add),
-//         onPressed: () {
-//           Navigator.push(context, MaterialPageRoute(builder: (context) {
-//             return FormularioIMC();
-//           })).then(
-//             (imcRecebido) => _atualiza(imcRecebido),
-//           );
-//         },
-//       ),
-//     );
+  double newPeso = peso;
+  double newAltura = altura;
+
+  final double newImc = (newPeso / (newAltura * newAltura));
+
+  return newImc;
+
+}
