@@ -24,6 +24,11 @@ class _ImcListState extends State<ImcList> {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
+              return Center(
+                child: Column(children: <Widget>[
+                  Text("Nehuma avaliação feita ainda.")
+                ],)
+              );
               break;
             case ConnectionState.waiting:
               return Center(
@@ -63,7 +68,7 @@ class _ImcListState extends State<ImcList> {
             MaterialPageRoute(
               builder: (context) => FormularioIMC(),
             ),
-          );
+          ).then((value) => setState(() {})); //useu o setState aqui para quando eu inserir pelo botão de +,  atualizar imediatamente quando volta pra lista
         },
       ),
     );
