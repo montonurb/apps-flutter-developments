@@ -2,54 +2,78 @@ import 'package:flutter/material.dart';
 import 'package:imc_app/models/dados_imc.dart';
 import 'package:imc_app/screens/formulario.dart';
 import 'package:imc_app/screens/menu_drawer.dart';
-import 'package:date_format/date_format.dart';
+import 'package:imc_app/database/dao/imc.dart';
 
 class ImcList extends StatefulWidget {
-  final List<DadosImc> _imcs = List();
+  final List<DadosImc> imcs = List();
   @override
   _ImcListState createState() => _ImcListState();
 }
 
 class _ImcListState extends State<ImcList> {
+  final ImcDao _dao = ImcDao();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MenuDrawer(),
       appBar: AppBar(title: Text('Lista')),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: widget._imcs.length,
-        itemBuilder: (context, indice) {
-          final imc = widget._imcs[indice];
-          return ItemImc(imc);
-        }
+      body: FutureBuilder<List<DadosImc>>(
+        initialData: List(),
+        future: _dao.findAll(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                    Text("Loading..."),
+                  ],
+                ),
+              );
+              break;
+            case ConnectionState.active:
+              break;
+            case ConnectionState.done:
+              final List<DadosImc> imcs = snapshot.data;
+              return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemBuilder: (context, index) {
+                    final DadosImc imc = imcs[index];
+                    return _ItemImc(imc);
+                  },
+                  itemCount: imcs.length,
+                  );
+              break;
+          }
+          return Text("Unkown erro!");
+        },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal[400],
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return FormularioIMC();
-          })).then(
-            (imcRecebido) => _atualiza(imcRecebido),
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => FormularioIMC(),
+            ),
           );
         },
-        backgroundColor: Colors.teal[400],
       ),
     );
   }
-
-  void _atualiza(DadosImc imcRecebido) {
-    if (imcRecebido != null) {
-      setState(() {
-        widget._imcs.add(imcRecebido);
-      });
-    }
-  }
 }
 
-class ItemImc extends StatelessWidget {
-  final DadosImc _imc;
-  ItemImc(this._imc);
+class _ItemImc extends StatelessWidget {
+
+  final DadosImc imc;
+  _ItemImc(this.imc);
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +90,7 @@ class ItemImc extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'ª AVALIAÇÃO',
+                '${imc.id}ª AVALIAÇÃO',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
@@ -74,7 +98,7 @@ class ItemImc extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(right: 20),
                 child: Text(
-                  '${formatDate(_imc.dataAvaliacao, [dd,'/', mm, '/', yyyy])}',
+                  '${imc.dataAvaliacao}',
                   style: TextStyle(fontSize: 12),
                 ),
               )
@@ -87,15 +111,16 @@ class ItemImc extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text('Peso: ${_imc.peso.toString()}Kg'),
+                      child: Text('Peso: ${imc.peso.toString()}Kg'),
                     ),
                     Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text('Altura: ${_imc.altura.toString()}cm'),
+                      child: Text('Altura: ${imc.altura.toString()}cm'),
                     ),
                     Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text('Imc: ${calcImc(_imc.peso, _imc.altura).toStringAsPrecision(4)}'),
+                      child: Text(
+                          'Imc: ${calcImc(imc.peso, imc.altura).toStringAsPrecision(4)}'),
                     ),
                   ],
                 ),
@@ -109,12 +134,10 @@ class ItemImc extends StatelessWidget {
 }
 
 calcImc(double peso, double altura) {
-
   double newPeso = peso;
   double newAltura = altura;
 
   final double newImc = (newPeso / (newAltura * newAltura));
 
   return newImc;
-
 }
