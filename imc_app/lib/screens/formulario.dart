@@ -1,6 +1,8 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:imc_app/models/dados_imc.dart';
 import 'package:imc_app/screens/menu_drawer.dart';
+import 'package:imc_app/database/dao/imc.dart';
 
 class FormularioIMC extends StatefulWidget {
   @override
@@ -12,6 +14,8 @@ class FormularioIMC extends StatefulWidget {
 class _FormularioIMCState extends State<FormularioIMC> {
   final TextEditingController _controllerPeso = TextEditingController();
   final TextEditingController _controllerAltura = TextEditingController();
+  final ImcDao _dao = ImcDao();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +39,7 @@ class _FormularioIMCState extends State<FormularioIMC> {
               keyboardType: TextInputType.number,
               //autofocus: true,
               decoration: InputDecoration(
-                  hintText: 'Peso',
+                  hintText: 'Peso (75.6)',
                   contentPadding: EdgeInsets.all(20),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5))),
@@ -46,7 +50,7 @@ class _FormularioIMCState extends State<FormularioIMC> {
               keyboardType: TextInputType.number,
               //autofocus: true,
               decoration: InputDecoration(
-                  hintText: 'Altura',
+                  hintText: 'Altura (1.67)',
                   contentPadding: EdgeInsets.all(20),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5))),
@@ -54,33 +58,30 @@ class _FormularioIMCState extends State<FormularioIMC> {
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
               child: RaisedButton(
-                child: Text(
-                  'Calcular',
-                  style: TextStyle(fontSize: 20),
-                ),
-                onPressed: () => _criaCampoImc(context),
-              ),
+                  child: Text(
+                    'Calcular',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    //_criaCampoImc(context);
+                    final double peso = double.tryParse(_controllerPeso.text);
+                    final double altura =
+                        double.tryParse(_controllerAltura.text);
+                    final String dataAvaliacao = '${formatDate(DateTime.now(), [dd,'/', mm, '/', yyyy])}';
+                    final DadosImc newImc =
+                        DadosImc(0, peso, altura, dataAvaliacao);
+                    _dao.save(newImc).then((id) => Navigator.pop(context));
+                  }),
             )
           ],
         ),
       )),
     );
   }
-
-  void _criaCampoImc(BuildContext context) {
-    final double peso = double.tryParse(_controllerPeso.text);
-    final double altura = double.tryParse(_controllerAltura.text);
-    final DateTime dataAvaliacao = DateTime.now();
-    if(peso != null && altura != null) {
-      DadosImc(peso, altura, dataAvaliacao);
-      final campoCriado = DadosImc(peso, altura, dataAvaliacao);
-        return Navigator.pop(context, campoCriado);
-    }
-  }
 }
 
-
-
-/**
- * '$formatDate(dataAvaliacao, [dd, '/', mm, '/', yyyy])'
- */
+String convertStringfromDate() {
+  DateTime data = DateTime.now();
+  return data.toString();
+}
+//DateTime.now().toString()
