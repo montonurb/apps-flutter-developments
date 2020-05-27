@@ -24,11 +24,6 @@ class _ImcListState extends State<ImcList> {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
-              return Center(
-                child: Column(children: <Widget>[
-                  Text("Nehuma avaliação feita ainda.")
-                ],)
-              );
               break;
             case ConnectionState.waiting:
               return Center(
@@ -46,15 +41,31 @@ class _ImcListState extends State<ImcList> {
               break;
             case ConnectionState.done:
               final List<DadosImc> imcs = snapshot.data;
+              if (imcs.length == 0) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(
+                        Icons.sentiment_dissatisfied,
+                        size: 75,
+                        color: Colors.teal[400],
+                      ),
+                      Text("Sem avaliações por enquanto!",
+                          style: TextStyle(fontSize: 22)),
+                    ],
+                  ),
+                );
+              }
               return GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
-                  itemBuilder: (context, index) {
-                    final DadosImc imc = imcs[index];
-                    return _ItemImc(imc);
-                  },
-                  itemCount: imcs.length,
-                  );
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  final DadosImc imc = imcs[index];
+                  return _ItemImc(imc);
+                },
+                itemCount: imcs.length,
+              );
               break;
           }
           return Text("Unkown erro!");
@@ -64,11 +75,14 @@ class _ImcListState extends State<ImcList> {
         backgroundColor: Colors.teal[400],
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => FormularioIMC(),
-            ),
-          ).then((value) => setState(() {})); //useu o setState aqui para quando eu inserir pelo botão de +,  atualizar imediatamente quando volta pra lista
+          Navigator.of(context)
+              .push(
+                MaterialPageRoute(
+                  builder: (context) => FormularioIMC(),
+                ),
+              )
+              .then((value) => setState(
+                  () {})); //useu o setState aqui para quando eu inserir pelo botão de +,  atualizar imediatamente quando volta pra lista
         },
       ),
     );
@@ -76,7 +90,6 @@ class _ImcListState extends State<ImcList> {
 }
 
 class _ItemImc extends StatelessWidget {
-
   final DadosImc imc;
   _ItemImc(this.imc);
 
@@ -120,7 +133,7 @@ class _ItemImc extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text('Altura: ${imc.altura.toString()}cm'),
+                      child: Text('Altura: ${imc.altura.toString()}m'),
                     ),
                     Padding(
                       padding: EdgeInsets.all(8.0),
