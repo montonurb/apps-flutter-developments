@@ -64,12 +64,12 @@ class _FormularioIMCState extends State<FormularioIMC> {
                   ),
                   onPressed: () {
                     //_criaCampoImc(context);
-                    final double peso = double.tryParse(_controllerPeso.text);
-                    final double altura =
-                        double.tryParse(_controllerAltura.text);
+                    final String peso = _controllerPeso.text;
+                    final double pesoNum = double.tryParse(peso.replaceAll(',', '.'));
+                    final String altura = _controllerAltura.text;
+                    final double alturaNum = double.tryParse(altura.replaceAll(',', '.'));
                     final String dataAvaliacao = '${formatDate(DateTime.now(), [dd,'/', mm, '/', yyyy])}';
-                    final DadosImc newImc =
-                        DadosImc(0, peso, altura, dataAvaliacao);
+                    final DadosImc newImc = DadosImc(0, pesoNum, alturaNum, dataAvaliacao);
                     _dao.save(newImc).then((id) => Navigator.pop(context));
                   }),
             )
