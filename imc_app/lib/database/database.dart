@@ -7,6 +7,6 @@ Future<Database> getDatabase() async {
   return openDatabase(path, onCreate: (db, version) {
       db.execute(ImcDao.tableSql);
     }, version: 1,
-    //onDowngrade: onDatabaseDowngradeDelete,
+    onDowngrade: onDatabaseDowngradeDelete,
     );
 }
